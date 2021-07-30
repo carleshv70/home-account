@@ -11,8 +11,9 @@
 	<name>home-account-domain</name>
 	<description>home-account-domain</description>
 	<packaging>jar</packaging>
-	
+
 	<properties>
 		<java.version>8</java.version>
 	</properties>
+
 </project>
