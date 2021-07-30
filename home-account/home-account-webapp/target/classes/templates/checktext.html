@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+
+<head>
+	<title>Interpretar Textos</title>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<div class="row">
+		<div class="col">
+			<h1 class="page-header">Texto Entrada</h1>
+			<br>
+			<form th:object="${data}" th:action="@{/events/check-text}" method="get">
+			 <div class="form-group row">
+				<div class="col-md-8 input-group">
+					<input type="text" class="form-control" name="inputText" id="search" th:value="${inputText}"
+						placeholder="Texto a interpretar" />
+					<input type="submit" value="Enviar" class="btn btn-primary btn-sm" />
+				</div>
+				<div class="alert alert-danger input-group col-md-8" role="alert" th:if="${!result}">
+				[[${error}]]
+			</div>
+			 </div>
+			</form>
+		</div>
+	</div>
+
+
+	<br />
+	<hr />
+	<div class="row" th:if="${isJSON}">
+		<div class="col">
+			<pre id="json">
+				<code>
+					[[${data.response}]]
+				</code>
+			</pre>
+		</div>
+	</div>
+</div>
+
+</html>
