@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.dto;
+package com.chuix.home.account.domain.entity;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FutbolEventDto implements IEventDto {
+public class FutbolEntity implements SportEnity {
 
 	public static String TEMPLATE = "^.*\\s\\d*-\\d*\\s.*$";
 	
@@ -22,7 +22,7 @@ public class FutbolEventDto implements IEventDto {
 	
 	public boolean checkTemplate(String inputString) {
 		
-		Pattern pat = Pattern.compile(FutbolEventDto.TEMPLATE);
+		Pattern pat = Pattern.compile(FutbolEntity.TEMPLATE);
 	     Matcher mat = pat.matcher(inputString);                                                                           
 	    
 	     return mat.matches(); 

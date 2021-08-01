@@ -1,6 +1,6 @@
-package com.chuix.home.account.domain.dto;
+package com.chuix.home.account.domain.entity;
 
-public interface IEventDto {
+public interface SportEnity {
 	
 	public boolean checkTemplate(String inputString);
 	

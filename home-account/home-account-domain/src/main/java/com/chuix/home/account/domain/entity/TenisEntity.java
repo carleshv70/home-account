@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.dto;
+package com.chuix.home.account.domain.entity;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TenisEventDto implements IEventDto {
+public class TenisEntity implements SportEnity {
 
 	public static String TEMPLATE = "^.*\\(\\d*\\).*-.*\\(\\d*\\).*$";
 	
@@ -24,11 +24,11 @@ public class TenisEventDto implements IEventDto {
 	
 	private boolean teamAServing;
 	private boolean teamBServing; 
-	private ScoreboardDto scoreboard;
+	private ScoreboardEntity scoreboard;
 	
 	public boolean checkTemplate(String inputString) {
 		
-		Pattern pat = Pattern.compile(TenisEventDto.TEMPLATE);
+		Pattern pat = Pattern.compile(TenisEntity.TEMPLATE);
 	     Matcher mat = pat.matcher(inputString);                                                                           
 	    
 	     return mat.matches(); 
@@ -95,8 +95,8 @@ public class TenisEventDto implements IEventDto {
 		scoreboardA = scoreboardA.substring(1, scoreboardA.length()-1);
 		scoreboardB = scoreboardB.substring(1, scoreboardB.length()-1);
 		
-		ElementDto elemen = new ElementDto("Sets", scoreboardA, scoreboardB);
-		ScoreboardDto scoreboard = new ScoreboardDto(); 
+		ElementEntity elemen = new ElementEntity("Sets", scoreboardA, scoreboardB);
+		ScoreboardEntity scoreboard = new ScoreboardEntity(); 
 		scoreboard.getElements().add(elemen);
 		this.setScoreboard(scoreboard);
 	}

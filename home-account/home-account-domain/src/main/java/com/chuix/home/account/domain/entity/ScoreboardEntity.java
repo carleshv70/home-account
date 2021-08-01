@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.dto;
+package com.chuix.home.account.domain.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScoreboardDto {
+public class ScoreboardEntity {
 
-	private List<ElementDto> elements = new ArrayList<>(); 
+	private List<ElementEntity> elements = new ArrayList<>(); 
 }

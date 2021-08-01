@@ -1,10 +1,10 @@
 package com.chuix.home.account.domain.services;
 
-import com.chuix.home.account.domain.dto.IEventDto;
+import com.chuix.home.account.domain.entity.SportEnity;
 
 public interface EventService {
 	
-	IEventDto CheckString(String inputText);
+	SportEnity CheckString(String inputText);
 	
 	String CheckStringView(String inputText);
 

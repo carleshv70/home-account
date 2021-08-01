@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chuix.home.account.domain.dto.IEventDto;
+import com.chuix.home.account.domain.entity.SportEnity;
 import com.chuix.home.account.domain.services.EventService;
 
 @RestController
@@ -26,10 +26,10 @@ public class EventsController {
 		
 		Map<String, Object> response = new HashMap<>();
 		
-		IEventDto event = this.service.CheckString(inputText);
+		SportEnity event = this.service.CheckString(inputText);
 		
 		response.put("Output:", event);
-		return new ResponseEntity<IEventDto>(event, HttpStatus.OK);
+		return new ResponseEntity<SportEnity>(event, HttpStatus.OK);
 	}
 	
 
