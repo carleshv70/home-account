@@ -140,5 +140,6 @@
 	<modules>
 		<module>home-account-webapp</module>
 		<module>home-account-domain</module>
+		<module>home-account-persistence</module>
 	</modules>
 </project>
