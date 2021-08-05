@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+
+<head>
+	<title>Medios de pago / Cuentas</title>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<div class="row">
+		<div class="col mt-5">
+			<div>
+				<h3>Medios pago / cuentas</h3>
+				<br>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nº Cuenta</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Saldo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pm : ${pms}">
+							<th scope="row">1</th>
+							<td th:text="${pm.accountNumber}">accountNumber</td>
+							<td th:text="${pm.name}">name</td>
+							<td th:text="${pm.balance}">balance</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+</html>
