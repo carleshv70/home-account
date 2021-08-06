@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-08-05T10:11:56+0200",
-    comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.3.1200.v20200916-0645, environment: Java 15.0.2 (Oracle Corporation)"
+    date = "2021-08-06T06:52:50+0200",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_271 (Oracle Corporation)"
 )
 @Component
 public class PaymentMethodMapperImpl implements PaymentMethodMapper {
@@ -22,11 +22,11 @@ public class PaymentMethodMapperImpl implements PaymentMethodMapper {
         PaymentMethodDto paymentMethodDto = new PaymentMethodDto();
 
         paymentMethodDto.setAccountNumber( entity.getAccountNumber() );
-        paymentMethodDto.setBalance( entity.getBalance() );
-        paymentMethodDto.setDatePreviousBalance( entity.getDatePreviousBalance() );
         paymentMethodDto.setName( entity.getName() );
         paymentMethodDto.setObservations( entity.getObservations() );
+        paymentMethodDto.setBalance( entity.getBalance() );
         paymentMethodDto.setPreviousBalance( entity.getPreviousBalance() );
+        paymentMethodDto.setDatePreviousBalance( entity.getDatePreviousBalance() );
 
         return paymentMethodDto;
     }
@@ -40,11 +40,11 @@ public class PaymentMethodMapperImpl implements PaymentMethodMapper {
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
 
         paymentMethodEntity.setAccountNumber( dto.getAccountNumber() );
-        paymentMethodEntity.setBalance( dto.getBalance() );
-        paymentMethodEntity.setDatePreviousBalance( dto.getDatePreviousBalance() );
         paymentMethodEntity.setName( dto.getName() );
         paymentMethodEntity.setObservations( dto.getObservations() );
+        paymentMethodEntity.setBalance( dto.getBalance() );
         paymentMethodEntity.setPreviousBalance( dto.getPreviousBalance() );
+        paymentMethodEntity.setDatePreviousBalance( dto.getDatePreviousBalance() );
 
         return paymentMethodEntity;
     }

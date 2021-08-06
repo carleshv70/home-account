@@ -1,8 +1,7 @@
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\app\AppConfiguration.java
+C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\controllers\view\PaymentMethodViewController.java
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\dto\BasquetDto.java
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\config\ViewConfiguration.java
-C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\controllers\api\EventsController.java
-C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\controllers\view\EventsViewController.java
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\app\HomeAccountApplication.java
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\dto\PaymentMethodDto.java
 C:\datos\git\repositories\home-account\home-account-webapp\src\main\java\com\chuix\home\account\controllers\api\PaymentMethodController.java
