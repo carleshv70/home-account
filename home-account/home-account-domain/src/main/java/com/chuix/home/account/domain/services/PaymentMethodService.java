@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chuix.home.account.domain.entity.PaymentMethodEntity;
+import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
 import com.chuix.home.account.domain.mapper.PaymentMethodMapper;
@@ -21,9 +21,9 @@ public class PaymentMethodService {
 	@Autowired
 	private PaymentMethodDao pmDao;
 
-	public List<PaymentMethodEntity> getPaymentMethods() {
-		List<PaymentMethodEntity> paymentMethods = new ArrayList<>();
-		PaymentMethodEntity pm = new PaymentMethodEntity();
+	public List<PaymentMethod> getPaymentMethods() {
+		List<PaymentMethod> paymentMethods = new ArrayList<>();
+		PaymentMethod pm = new PaymentMethod();
 		pm.setAccountNumber("01234567890123456789012");
 		pm.setName("Carles");
 		pm.setBalance(1500d);
@@ -31,7 +31,7 @@ public class PaymentMethodService {
 		return paymentMethods;
 	}
 
-	public PaymentMethodEntity addPaymentMethod(PaymentMethodEntity pm) throws BusinessException {
+	public PaymentMethod addPaymentMethod(PaymentMethod pm) throws BusinessException {
 
 		// Check if exist
 		if (getPaymentMethodByAccountNumber(pm.getAccountNumber()) != null) {
@@ -40,8 +40,8 @@ public class PaymentMethodService {
 		return this.save(pm);
 	}
 
-	private PaymentMethodEntity getPaymentMethodByAccountNumber(String accountNumber) throws BusinessException {
-		PaymentMethodEntity pm;
+	private PaymentMethod getPaymentMethodByAccountNumber(String accountNumber) throws BusinessException {
+		PaymentMethod pm;
 		try {
 			pm = this.mapper.mapToEntity(this.pmDao.findByAccountNumber(accountNumber));
 		} catch (Exception ex) {
@@ -50,8 +50,8 @@ public class PaymentMethodService {
 		return pm;
 	}
 	
-	private PaymentMethodEntity save(PaymentMethodEntity pm) throws BusinessException {
-		PaymentMethodEntity pmSaved;
+	private PaymentMethod save(PaymentMethod pm) throws BusinessException {
+		PaymentMethod pmSaved;
 		try {
 			pmSaved = this.mapper.mapToEntity(this.pmDao.save(this.mapper.mapToJPA(pm)));	
 		}

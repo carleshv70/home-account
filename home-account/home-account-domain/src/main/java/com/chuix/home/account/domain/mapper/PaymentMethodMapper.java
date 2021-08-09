@@ -3,15 +3,15 @@ package com.chuix.home.account.domain.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.chuix.home.account.domain.entity.PaymentMethodEntity;
-import com.chuix.home.account.persistence.entity.PaymentMethodJPA;
+import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.persistence.entity.PaymentMethodEntity;
 
 @Mapper
 public interface PaymentMethodMapper {
 	
 	PaymentMethodMapper INSTANCE = Mappers.getMapper(PaymentMethodMapper.class);
 
-	PaymentMethodEntity mapToEntity(PaymentMethodJPA entity);
+	PaymentMethod mapToEntity(PaymentMethodEntity entity);
 	
-	PaymentMethodJPA mapToJPA(PaymentMethodEntity dto);
+	PaymentMethodEntity mapToJPA(PaymentMethod dto);
 }

@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentMethodDto {
+	
+	private Long Id;
+	
 	@NotNull(message = "Este campo debe estar informado")
 	@Size(min = 20, max = 34)
 	private String accountNumber;
