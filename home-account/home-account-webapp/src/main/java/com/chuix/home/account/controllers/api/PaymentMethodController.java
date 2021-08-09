@@ -20,7 +20,6 @@ import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.services.PaymentMethodService;
 import com.chuix.home.account.dto.PaymentMethodDto;
 import com.chuix.home.account.dto.mapper.PaymentMethodDtoMapper;
-import com.chuix.home.account.dto.mapper.PaymentMethodMapper;
 
 @RestController
 @RequestMapping("/api/medios-pago")
