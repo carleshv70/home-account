@@ -17,7 +17,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<lombok.version>1.18.20</lombok.version>
 		<google.code.gson.version>2.8.7</google.code.gson.version>
 		<thymeleaf.version>3.0.12.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.5.3</thymeleaf-layout-dialect.version>
@@ -26,17 +25,16 @@
 		<mysql.jdbc.driver.version>5.1.44</mysql.jdbc.driver.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+		<lombok.version>1.18.20</lombok.version>
 		<javax.validation.version>2.0.1.Final</javax.validation.version>
 		<mysql-connector-java.version>8.0.26</mysql-connector-java.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok-mapstruct-binding</artifactId>
-				<version>${lombok-mapstruct-binding.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.mapstruct</groupId>
 				<artifactId>mapstruct</artifactId>
@@ -45,11 +43,9 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.mapstruct</groupId>
-				<artifactId>mapstruct-processor</artifactId>
-				<version>${mapstruct.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-mapstruct-binding</artifactId>
+				<version>${lombok-mapstruct-binding.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>

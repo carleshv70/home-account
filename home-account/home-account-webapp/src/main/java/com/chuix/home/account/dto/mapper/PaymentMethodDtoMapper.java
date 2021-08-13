@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.dto.PaymentMethodDto;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PaymentMethodDtoMapper {
 	
 	PaymentMethodDtoMapper INSTANCE = Mappers.getMapper(PaymentMethodDtoMapper.class);

@@ -15,9 +15,9 @@ import com.chuix.home.account.domain.mapper.PaymentMethodMapperImpl;
 })
 public class DependenceConfig {
 	
-	@Bean
-	public PaymentMethodMapper getPaymentMethodMapper() {
-		return new PaymentMethodMapperImpl();
-	}
+//	@Bean
+//	public PaymentMethodMapper getPaymentMethodMapper() {
+//		return new PaymentMethodMapperImpl();
+//	}
 
 }

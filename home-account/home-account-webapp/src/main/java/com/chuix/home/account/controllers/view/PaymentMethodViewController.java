@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.chuix.home.account.domain.services.PaymentMethodService;
 import com.chuix.home.account.dto.PaymentMethodDto;
-import com.chuix.home.account.dto.mapper.PaymentMethodMapper;
+import com.chuix.home.account.dto.mapper.PaymentMethodDtoMapper;
 
 @Controller
 @RequestMapping("/medios-pago")
 public class PaymentMethodViewController {
 
 	@Autowired
-	private PaymentMethodMapper mapper;
+	private PaymentMethodDtoMapper mapper;
 
 	@Autowired
 	private PaymentMethodService serive;
@@ -26,7 +26,8 @@ public class PaymentMethodViewController {
 	@GetMapping("/")
 	public String interpretText(Model model) {
 
-		List<PaymentMethodDto> pms = this.serive.getPaymentMethods().stream().map(pm -> this.mapper.mapToDto(pm))
+		List<PaymentMethodDto> pms = this.serive.getPaymentMethods()
+				.stream().map(pm -> this.mapper.mapToDto(pm))
 				.collect(Collectors.toList());
 
 		model.addAttribute("pms", pms);
