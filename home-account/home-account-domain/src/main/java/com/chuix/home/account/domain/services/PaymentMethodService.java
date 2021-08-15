@@ -10,4 +10,8 @@ public interface PaymentMethodService {
 	List<PaymentMethod> getPaymentMethods();
 
 	PaymentMethod addPaymentMethod(PaymentMethod pm) throws BusinessException;
+	
+	PaymentMethod updatedPaymentMethod(Long id, PaymentMethod pm) throws BusinessException;
+	
+	void updatedPaymentMethod(Long id);
 }
