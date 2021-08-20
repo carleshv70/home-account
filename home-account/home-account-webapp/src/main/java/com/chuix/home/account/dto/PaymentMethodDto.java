@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.chuix.home.account.constants.ApplicationConstant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -30,6 +31,8 @@ public class PaymentMethodDto implements BaseDto {
 	private Double balance;
 
 	private Double previousBalance;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate datePreviousBalance;
 	
 	private List<LinkDto> links;
