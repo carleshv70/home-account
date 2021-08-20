@@ -1,63 +1,65 @@
 package com.chuix.home.account.controllers.api;
 
-import java.util.HashMap;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_CREATE;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_LIST;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_PAYMENT_METHOD;
+
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.services.PaymentMethodService;
 import com.chuix.home.account.dto.PaymentMethodDto;
 import com.chuix.home.account.dto.mapper.PaymentMethodDtoMapper;
 
 @RestController
-@RequestMapping("/api/medios-pago")
+@RequestMapping(PATH_PAYMENT_METHOD)
 public class PaymentMethodController {
-	
+
 	@Autowired
 	private PaymentMethodDtoMapper mapper;
 
 	@Autowired
 	private PaymentMethodService serive;
-
-	@GetMapping("/")
-	public ResponseEntity<?> getPaymentMethods() {
-
-		List<PaymentMethodDto> pms = this.serive.getPaymentMethods().stream().map(pm -> this.mapper.mapToDto(pm))
-				.collect(Collectors.toList());
-
-		return new ResponseEntity<List<PaymentMethodDto>>(pms, HttpStatus.OK);
+	
+	@Autowired
+	private Request<PaymentMethodDto, PaymentMethod> request;
+	
+	private Function<PaymentMethod, PaymentMethodDto> mapperToDtoFunc;
+	
+	PaymentMethodController() {
+		this.mapperToDtoFunc = (pm -> this.mapper.mapToDto(pm));
+	}
+	
+	@GetMapping(PATH_LIST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public Map<String, List<PaymentMethodDto>> getPaymentMethods() {
+		
+		return this.request.prepareResponseList(
+				this.serive.getPaymentMethods(), 
+				this.mapperToDtoFunc);
 	}
 
-	@PostMapping("/")
-	public ResponseEntity<Map<String,Object>> addPaymentMethod(@Valid @RequestBody PaymentMethodDto pm) {
-		
-		Map<String,Object> response = new HashMap<>();
-		PaymentMethodDto pmAdded; 
-		
-		try {
-			pmAdded = 
-				this.mapper.mapToDto(
-					this.serive.addPaymentMethod(
-							this.mapper.mapToEntity(pm)
-						)
-				);
-			response.put("PaymentMethod", pmAdded);
-		} catch (BusinessException ex) {
-			response.put("Error", ex.toString());
-		} 
-		
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+	@PostMapping(PATH_CREATE)
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public Map<String, PaymentMethodDto> addPaymentMethod(@Valid @RequestBody PaymentMethodDto pm) throws BusinessException {
+
+			return this.request.prepareResponse(
+					this.serive.addPaymentMethod(this.mapper.mapToEntity(pm)),
+					this.mapperToDtoFunc
+			);
 	}
 }

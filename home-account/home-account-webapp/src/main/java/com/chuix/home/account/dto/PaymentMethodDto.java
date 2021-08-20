@@ -1,21 +1,21 @@
 package com.chuix.home.account.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
+import com.chuix.home.account.constants.ApplicationConstant;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PaymentMethodDto {
+public class PaymentMethodDto implements BaseDto {
 	
-	private Long Id;
+	private Long id;
 	
 	@NotNull(message = "Este campo debe estar informado")
 	@Size(min = 20, max = 34)
@@ -30,5 +30,46 @@ public class PaymentMethodDto {
 	private Double balance;
 
 	private Double previousBalance;
-	private LocalDate DatePreviousBalance;
+	private LocalDate datePreviousBalance;
+	
+	private List<LinkDto> links;
+	
+	public PaymentMethodDto() {
+		this.links = new ArrayList<>();
+	}
+
+
+	// information necessary to generate response
+	@Override
+	public String getKey() { return "paymentMethod"; }
+
+	@Override
+	public String getKeyList() { return "paymentMethods"; }
+
+	
+	// this method is necessary to create links 
+	@Override
+	public String getBaseUrl() {
+
+		return 	String.format(
+				ApplicationConstant.PATHERN_ROUTE_PAYMENT_METHOD, 
+				ApplicationConstant.PATH_PAYMENT_METHOD
+		);
+	}
+
+	// this method is necessary to create links
+	@Override
+	public String getRelativePath(HttpMethodEnum httpMethod) {
+	
+		if (HttpMethodEnum.PUT.equals(httpMethod)) {
+			return String.format( ApplicationConstant.PATHERN_ROUTE_PAYMENT_METHOD_UPDATE, this.getId() );
+		}
+		if (HttpMethodEnum.DELETE.equals(httpMethod)) {
+			return String.format( ApplicationConstant.PATHERN_ROUTE_PAYMENT_METHOD_DELETE, this.getId() );
+		}
+		return String.format( ApplicationConstant.PATHERN_ROUTE_PAYMENT_METHOD_READ, this.getId() );
+
+	}
+
+
 }

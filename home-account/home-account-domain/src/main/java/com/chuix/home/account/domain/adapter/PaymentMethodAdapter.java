@@ -8,6 +8,8 @@ public interface PaymentMethodAdapter {
 	
 	List<PaymentMethod> findAll();
 	
+	PaymentMethod findById(Long id);
+	
 	PaymentMethod findByAccountNumber(String accountNumber);
 	
 	PaymentMethod save(PaymentMethod paymentMethod);
