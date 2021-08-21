@@ -1,5 +1,6 @@
 package com.chuix.home.account.domain.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,27 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 	}
 
 	@Override
-	public void updatedPaymentMethod(Long id) {
-		// TODO Auto-generated method stub
+	public void deletePaymentMethod(Long id) throws BusinessException {
 
+		PaymentMethod pmDB = this.port.findById(id);
+
+		// check if is null
+		if (pmDB == null) {
+			throw new BusinessException(BusinessExceptionEnum.BE0002);
+		}
+		pmDB.setDeleteAt(LocalDate.now());
+		this.port.save(pmDB);
+	}
+
+	@Override
+	public PaymentMethod getPaymentMethod(Long id) throws BusinessException {
+		PaymentMethod pm = this.port.findById(id);
+		if ( pm == null ) {
+			throw new BusinessException(BusinessExceptionEnum.BE0002);
+		}
+		return pm;
 	}
 	
-
 	private PaymentMethod getPaymentMethodByAccountNumber(String accountNumber) throws BusinessException {
 
 		PaymentMethod pm;
@@ -76,7 +92,4 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 		return pmSaved;
 
 	}
-
-
-
 }

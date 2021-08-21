@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +61,16 @@ public class PaymentMethodController {
 				this.mapperToDtoFunc);
 	}
 
+	@GetMapping(PATH_READ)
+	@ResponseStatus(value = HttpStatus.OK)
+	public Map<String, PaymentMethodDto> readPaymentMethod(@PathVariable @NotNull Long id) throws BusinessException {
+
+		return this.request.prepareResponse(
+				this.serive.getPaymentMethod(id),
+				this.mapperToDtoFunc
+		);
+	}
+	
 	@PostMapping(PATH_CREATE)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Map<String, PaymentMethodDto> addPaymentMethod(@Valid @RequestBody PaymentMethodDto pm) throws BusinessException {
@@ -78,8 +89,13 @@ public class PaymentMethodController {
 				this.serive.updatedPaymentMethod(id, this.mapper.mapToEntity(pm)),
 				this.mapperToDtoFunc
 		);
-}
+	}
 	
+	@DeleteMapping(PATH_DELETE)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void deletePaymentMethod(@PathVariable @NotNull Long id) throws BusinessException {
+		this.serive.deletePaymentMethod(id);
+	}
 	
 	
 }

@@ -31,6 +31,9 @@ public class PaymentMethod {
 	@NotNull(message = "Este campo tiene que estar informado")
 	private Double balance;
 
+	private LocalDate createAt;
+	private LocalDate deleteAt;
+	
 	private Double previousBalance;
 	private LocalDate datePreviousBalance;
 }

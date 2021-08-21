@@ -35,38 +35,24 @@ public class PaymentMethodAdapterImpl implements PaymentMethodAdapter {
 
 	@Override
 	public PaymentMethod save(PaymentMethod pm) {
-		PaymentMethodEntity pmJPA = null;
+		PaymentMethodEntity pmJpaDB = null;
 	
 		if( pm.getId() != null ) {
 			Optional<PaymentMethodEntity> optPmJPA = this.pmDao.findById(pm.getId()); 
 			
 			if (optPmJPA.isPresent()) {
 				
-				pmJPA = optPmJPA.get();
-
-				pmJPA.setAccountNumber(pm.getAccountNumber());
-				pmJPA.setBalance(pm.getBalance());
-				pmJPA.setDatePreviousBalance(pm.getDatePreviousBalance());
-				pmJPA.setName(pm.getName());
-				pmJPA.setObservations(pm.getObservations());
-				pmJPA.setPreviousBalance(pm.getPreviousBalance());
+				pmJpaDB = optPmJPA.get();
+				this.mapper.update(pmJpaDB, pm);
 			}
 		}
 		
-		if (pmJPA == null) {
+		if (pmJpaDB == null) {
 
-			pmJPA = PaymentMethodEntity.builder()
-				.accountNumber(pm.getAccountNumber())
-				.balance(pm.getBalance())
-				.datePreviousBalance(pm.getDatePreviousBalance())
-				.name(pm.getName())
-				.observations(pm.getObservations())
-				.previousBalance(pm.getPreviousBalance())
-				.build();
-			
+			pmJpaDB = this.mapper.mapToJPA(pm);
 		}
 		
-		PaymentMethodEntity pmJPASaved = this.pmDao.save(pmJPA);
+		PaymentMethodEntity pmJPASaved = this.pmDao.save(pmJpaDB);
 		
 		return this.mapper.mapToEntity(pmJPASaved);
 	}

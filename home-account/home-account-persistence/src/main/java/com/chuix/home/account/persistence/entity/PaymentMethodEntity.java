@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Where;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +22,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Payment_methods")
+@Where(clause = "delete_at is null ")
 @Data
 @Builder
 @NoArgsConstructor
@@ -46,4 +50,15 @@ public class PaymentMethodEntity {
 
 	private Double previousBalance;
 	private LocalDate datePreviousBalance;
+	
+	@Column(name = "create_at")
+	private LocalDate createAt;
+	
+	@Column(name = "delete_at")
+	private LocalDate deleteAt;
+	
+	@PrePersist
+	public void prePersist() {
+		this.createAt = LocalDate.now();
+	}
 }

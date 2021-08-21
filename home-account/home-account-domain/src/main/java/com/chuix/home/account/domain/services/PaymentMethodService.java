@@ -13,5 +13,7 @@ public interface PaymentMethodService {
 	
 	PaymentMethod updatedPaymentMethod(Long id, PaymentMethod pm) throws BusinessException;
 	
-	void updatedPaymentMethod(Long id);
+	void deletePaymentMethod(Long id)  throws BusinessException;
+	
+	PaymentMethod getPaymentMethod(Long id)  throws BusinessException;
 }
