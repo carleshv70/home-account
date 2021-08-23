@@ -31,23 +31,29 @@ public class Link<T extends BaseDto> {
 		);
 	}
 	
-	private String generateUrl(T entity) {
-		return this.baseUrl() + entity.getBaseUrl();
+	private String generateUrl(T entity, boolean view) {
+		return this.baseUrl() +
+				(!view ? ApplicationConstant.PATH_API_REST : "" ) +
+				entity.getBaseUrl();
 	}
 	
-	private String addUpdateLink(T entity) {
-		return this.generateUrl(entity) +
-				entity.getRelativePath(HttpMethodEnum.PUT);
+	private String addUpdateLink(T entity, boolean view) {
+		return this.generateUrl(entity, view) +
+
+				entity.getRelativePath(HttpMethodEnum.PUT) +
+				(view? "/save": "");
 	}
 		
-	private String addDeleteLink(T entity) {
-		return this.generateUrl(entity) +
-				entity.getRelativePath(HttpMethodEnum.DELETE);
+	private String addDeleteLink(T entity, boolean view) {
+		return this.generateUrl(entity, view) +
+				entity.getRelativePath(HttpMethodEnum.DELETE) +
+				(view? "/delete": "");
 	}
 	
-	private String addReadLink(T entity) {
-		return this.generateUrl(entity) +
-				entity.getRelativePath(HttpMethodEnum.GET);
+	private String addReadLink(T entity, boolean view) {
+		return this.generateUrl(entity, view) +
+				entity.getRelativePath(HttpMethodEnum.GET) +
+				(view? "/edit": "");
 	}
 
 	
@@ -57,7 +63,8 @@ public class Link<T extends BaseDto> {
 				entity.getLinks().add(
 						LinkDto.builder()
 							.httpMethod(HttpMethodEnum.GET)
-							.url(this.addReadLink(entity))
+							.url(this.addReadLink(entity , false))
+							.urlView(this.addReadLink(entity, true))
 						.build()
 				);
 				
@@ -66,7 +73,8 @@ public class Link<T extends BaseDto> {
 				entity.getLinks().add(
 						LinkDto.builder()
 							.httpMethod(HttpMethodEnum.PUT)
-							.url(this.addUpdateLink(entity))
+							.url(this.addUpdateLink(entity, false))
+							.urlView(this.addUpdateLink(entity, true))
 						.build()
 				);
 			}
@@ -74,7 +82,8 @@ public class Link<T extends BaseDto> {
 				entity.getLinks().add(
 						LinkDto.builder()
 							.httpMethod(HttpMethodEnum.DELETE)
-							.url(this.addDeleteLink(entity))
+							.url(this.addDeleteLink(entity, false))
+							.urlView(this.addDeleteLink(entity, true))
 						.build()
 				);
 			}

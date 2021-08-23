@@ -1,6 +1,7 @@
 package com.chuix.home.account.dto;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +29,23 @@ public interface BaseDto {
 
 		};
 
+	}
+	
+	default String getUrl(String httpMethod, boolean view) {
+		Optional<LinkDto> optLink = this.getLinks().stream()
+				.filter(link -> {
+					
+					HttpMethodEnum h = HttpMethodEnum.valueOf(httpMethod);
+					return link.getHttpMethod().equals(h);
+				}).findFirst();
+		
+		if ( !optLink.isPresent()) {
+			return this.getBaseUrl() + "404.html";
+		}
+		
+		LinkDto linkDto = optLink.get();
+		
+		return view? linkDto.getUrlView(): linkDto.getUrl();
 	}
 
 	

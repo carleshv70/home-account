@@ -1,5 +1,7 @@
 package com.chuix.home.account.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,4 +15,7 @@ public class LinkDto {
 
 	private HttpMethodEnum httpMethod;
 	private String url;
+	
+	@JsonIgnore
+	private String urlView;
 }

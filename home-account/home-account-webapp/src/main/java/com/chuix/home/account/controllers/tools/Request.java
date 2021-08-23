@@ -26,30 +26,40 @@ public class Request<T extends BaseDto, T2> {
 	@Autowired
 	private Link<T> link;
 
-	public Map<String, List<T>> prepareResponseList(List<T2> items, Function<T2, T> func) {
+	public Map<String, List<T>> prepareListApi(List<T2> items, Function<T2, T> func) {
 
 		this.responseList.clear();
 		
 		if(!items.isEmpty()) {
 			
-			List<T> itemsDto = items.stream()
-					.map(item -> {
-						T itemDto = func.apply(item);
-						this.link.generateLinks(itemDto);
-						return itemDto;
-			}).collect(Collectors.toList());
-			
+			List<T> itemsDto = this.prepareListView(items, func);
 			String key = itemsDto.get(0).getKeyList();
 			this.responseList.put(key, itemsDto);
 		}
 		return responseList;
 	}
 	
-	public Map<String, T> prepareResponse(T2 item, Function<T2, T> func) {
+	public List<T> prepareListView(List<T2> items, Function<T2, T> func) {
+		
+		return items.stream()
+				.map(item -> {
+					T itemDto = func.apply(item);
+					this.link.generateLinks(itemDto);
+					return itemDto;
+		}).collect(Collectors.toList());
+	}
+	
+	public Map<String, T> prepareApi(T2 item, Function<T2, T> func) {
 		this.response.clear();
-		T itemDto = func.apply(item);
-		this.link.generateLinks(itemDto);
+		T itemDto = this.prepareView(item, func);
 		this.response.put(itemDto.getKey(), itemDto);
 		return this.response;
+	}
+	
+	public T prepareView(T2 item, Function<T2, T> func) {
+		T itemDto = func.apply(item);
+		this.link.generateLinks(itemDto);
+		return itemDto;
+		
 	}
 }

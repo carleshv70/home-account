@@ -3,7 +3,8 @@ package com.chuix.home.account.constants;
 public class ApplicationConstant {
 
 	// Constants to create the routes
-	public static final String PATH_PAYMENT_METHOD = "/api/medios-pago";
+	public static final String PATH_API_REST = "/api";
+	public static final String PATH_PAYMENT_METHOD = "/medios-pago";
 	public static final String PATH_CREATE = "/";
 	public static final String PATH_UPDATE = "/{id}";
 	public static final String PATH_DELETE = "/{id}";

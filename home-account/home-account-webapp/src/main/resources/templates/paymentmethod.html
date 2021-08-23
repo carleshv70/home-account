@@ -19,6 +19,8 @@
 							<th scope="col">Nº Cuenta</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Saldo</th>
+							<th scope="col">Editar</th>
+							<th scope="col">Borrar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,6 +29,17 @@
 							<td th:text="${pm.accountNumber}">accountNumber</td>
 							<td th:text="${pm.name}">name</td>
 							<td th:text="${pm.balance}">balance</td>
+							<td>
+								<a type="button" class="btn btn-primary" th:href="${pm.getUrl('GET', true)}">
+									<i class="fa fa-edit"></i>
+								</a>
+							</td>
+							<td>
+								<a type="button" class="btn btn-danger" th:href="${pm.getUrl('DELETE', true)}">
+									<i class="fa fa-trash"></i>
+								</a>
+							</td>
+							
 						</tr>
 					</tbody>
 				</table>

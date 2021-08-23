@@ -6,6 +6,8 @@ import static com.chuix.home.account.constants.ApplicationConstant.PATH_DELETE;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_READ;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_LIST;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_PAYMENT_METHOD;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_API_REST;
+
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +36,7 @@ import com.chuix.home.account.dto.PaymentMethodDto;
 import com.chuix.home.account.dto.mapper.PaymentMethodDtoMapper;
 
 @RestController
-@RequestMapping(PATH_PAYMENT_METHOD)
+@RequestMapping(PATH_API_REST + PATH_PAYMENT_METHOD)
 public class PaymentMethodController {
 
 	@Autowired
@@ -56,7 +58,7 @@ public class PaymentMethodController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public Map<String, List<PaymentMethodDto>> getPaymentMethods() {
 		
-		return this.request.prepareResponseList(
+		return this.request.prepareListApi(
 				this.serive.getPaymentMethods(), 
 				this.mapperToDtoFunc);
 	}
@@ -65,7 +67,7 @@ public class PaymentMethodController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public Map<String, PaymentMethodDto> readPaymentMethod(@PathVariable @NotNull Long id) throws BusinessException {
 
-		return this.request.prepareResponse(
+		return this.request.prepareApi(
 				this.serive.getPaymentMethod(id),
 				this.mapperToDtoFunc
 		);
@@ -75,7 +77,7 @@ public class PaymentMethodController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Map<String, PaymentMethodDto> addPaymentMethod(@Valid @RequestBody PaymentMethodDto pm) throws BusinessException {
 
-			return this.request.prepareResponse(
+			return this.request.prepareApi(
 					this.serive.addPaymentMethod(this.mapper.mapToEntity(pm)),
 					this.mapperToDtoFunc
 			);
@@ -85,7 +87,7 @@ public class PaymentMethodController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public Map<String, PaymentMethodDto> updatePaymentMethod(@PathVariable @NotNull Long id, @Valid @RequestBody PaymentMethodDto pm) throws BusinessException {
 
-		return this.request.prepareResponse(
+		return this.request.prepareApi(
 				this.serive.updatedPaymentMethod(id, this.mapper.mapToEntity(pm)),
 				this.mapperToDtoFunc
 		);

@@ -17,5 +17,15 @@ public enum HttpMethodEnum {
 	public String getValue() {
 		return this.value;
 	}
+	
+	public HttpMethodEnum getFromValue(String strHttpMethod) {
+
+		for(HttpMethodEnum httpMethod :HttpMethodEnum.values()) {
+			if( httpMethod.getValue().equals(strHttpMethod)) {
+				return httpMethod;
+			}
+		}
+		return null;
+	}
 
 }
