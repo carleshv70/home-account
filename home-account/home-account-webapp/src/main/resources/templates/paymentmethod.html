@@ -40,9 +40,9 @@
 								</a>
 							</td>
 							<td>
-								<a type="button" class="btn btn-danger" th:href="${pm.getUrl('DELETE', true)}">
+								<button type="button" class="btn btn-danger" th:attr="onclick=|javascript:del('${pm.id}','${pm.accountNumber}','${pm.getUrl('DELETE', true)}')|">
 									<i class="fa fa-trash"></i>
-								</a>
+								</button>
 							</td>
 							
 						</tr>
@@ -54,4 +54,27 @@
 
 </div>
 
+
+<script type="text/javascript" layout:fragment="scripts" id="scripts">
+	function del(id, accountNumber, url) {
+
+		Swal.fire({
+			  title: '¿Estás seguro?',
+			  text: '¿ Estás seguro de que deseas eliminar la cuenta ' + accountNumber + "?",
+			  icon: 'warning',
+			  confirmButtonText: 'Si, eliminar!',
+		      cancelButtonText: 'No, cancelar!',
+		      confirmButtonClass: 'btn btn-success',
+		      cancelButtonClass: 'btn btn-danger',
+			  showCancelButton: true
+			}).then( (result) => {
+
+				if (result.value) {
+					console.log("Borrar registro");
+					console.log(url);
+					document.location.href=url;
+				}
+			});
+	}
+</script>
 </html>
