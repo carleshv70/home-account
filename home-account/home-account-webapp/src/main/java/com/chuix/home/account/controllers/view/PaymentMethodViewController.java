@@ -3,6 +3,8 @@ package com.chuix.home.account.controllers.view;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_LIST_VIEW;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_PAYMENT_METHOD;
 import static com.chuix.home.account.constants.ApplicationConstant.PATH_UPDATE_VIEW;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_CREATE_VIEW;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_DELETE_VIEW;
 
 import java.util.function.Function;
 
@@ -62,6 +64,7 @@ public class PaymentMethodViewController {
 					this.mapperToDtoFunc
 				)
 		);
+		model.addAttribute("url_new", PATH_PAYMENT_METHOD+PATH_CREATE_VIEW);
 		return "paymentmethod";
 
 	}
@@ -104,5 +107,42 @@ public class PaymentMethodViewController {
 		
 		return "redirect:" + PATH_PAYMENT_METHOD + PATH_LIST_VIEW;
 	}
+	
+	@GetMapping(PATH_CREATE_VIEW)
+	public String addPaymentMethod(Model model) {
+		model.addAttribute("pm", new PaymentMethodDto());
+		model.addAttribute("url", PATH_PAYMENT_METHOD + PATH_CREATE_VIEW);
+		return "paymentmethod_edit";
+	}
+	
+	@PostMapping(PATH_CREATE_VIEW)
+	public String addPaymentMethod(
+			@Valid @ModelAttribute("pm") PaymentMethodDto pmDto, 
+			BindingResult result, 
+			Model model 
+		) throws BusinessException {
+	
+		if( result.hasErrors()) {
+			model.addAttribute("pm", pmDto);
+			return "paymentmethod_edit";
+		} 
+		
+		PaymentMethodDto pmUpdatedDto = this.request
+				.prepareView(
+						this.serive.addPaymentMethod(this.mapper.mapToEntity(pmDto)), 
+						this.mapperToDtoFunc);
+		
+		model.addAttribute("pm", pmUpdatedDto);
+		
+		return "redirect:" + PATH_PAYMENT_METHOD + PATH_LIST_VIEW;
+	}
+	
+	@GetMapping(PATH_DELETE_VIEW)
+	public String addPaymentMethod(@PathVariable Long id) throws BusinessException {
+		this.serive.deletePaymentMethod(id);
+		return "redirect:" + PATH_PAYMENT_METHOD + PATH_LIST_VIEW;
+	}
+
+	
 
 }
