@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{base}">
+
+<head>
+<title>Medios de pago / Cuentas</title>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<div class="row">
+		<div class="col mt-5">
+			<div>
+				<h3>Medios pago / cuentas</h3>
+				<br>
+
+				<form th:action="${url}" th:object="${pm}" method="post">
+				
+					<input type="hidden" th:field="*{id}" />
+
+					<fieldset enabled>
+
+						<legend>Datos del medio de pago</legend>
+
+						<div class="mb-3">
+							<label for="idAccountNumber" class="form-label">Número de
+								cuenta</label> <input type="text" id="idAccountNumber"
+								class="form-control" th:field="*{accountNumber}"
+								placeholder="Número de cuenta">
+								<small class="form-text text-danger" 
+									th:if="${#fields.hasErrors('*{accountNumber}')}" 
+									th:errors="*{accountNumber}">
+								</small>
+						</div>
+
+						<div class="mb-3">
+							<label for="idName" class="form-label">Nombre del titular</label>
+							<input type="text" id="idName" class="form-control"
+								th:field="*{name}" placeholder="Nombre">
+							
+							<small class="form-text text-danger" 
+								th:if="${#fields.hasErrors('*{name}')}" 
+								th:errors="*{name}">
+							</small>
+						</div>
+
+						<div class="mb-3">
+							<label for="idBalance" class="form-label">Saldo</label> <input
+								type="number" id="idBalance" class="form-control"
+								th:field="*{balance}" placeholder="Saldo">
+							<small class="form-text text-danger" 
+								th:if="${#fields.hasErrors('*{balance}')}" 
+								th:errors="*{balance}">
+							</small>
+						</div>
+
+						<div class="mb-3">
+							<label for="idPreviousBalance" class="form-label">Saldo
+								anterior</label> <input type="number" id="idPreviousBalance"
+								class="form-control" th:field="*{previousBalance}"
+								placeholder="Saldo anterior">
+								
+							<small class="form-text text-danger" 
+								th:if="${#fields.hasErrors('*{previousBalance}')}" 
+								th:errors="*{previousBalance}">
+							</small>
+						</div>
+
+						<div class="mb-3">
+							<label for="idDatePreviousBalance" class="form-label">Fecha
+								saldo anterior</label> <input type="date" id="idDatePreviousBalance"
+								class="form-control" th:field="*{datePreviousBalance}"
+								placeholder="Fecha saldo anterior">
+								
+								<small class="form-text text-danger" 
+									th:if="${#fields.hasErrors('*{datePreviousBalance}')}" 
+									th:errors="*{datePreviousBalance}">
+								</small>
+						</div>
+
+						<div class="mb-3">
+							<label for="idObservations" class="form-label">Observaciones</label>
+							<input type="text" id="idObservations" class="form-control"
+								th:field="*{observations}" placeholder="Observaciones">
+								
+							<small class="form-text text-danger" 
+								th:if="${#fields.hasErrors('*{datePreviousBalance}')}" 
+								th:errors="*{observations}">
+							</small>
+						</div>
+
+						<button type="submit" class="btn btn-primary">Guardar</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+</html>

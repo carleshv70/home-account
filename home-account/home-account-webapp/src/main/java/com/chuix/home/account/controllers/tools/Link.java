@@ -32,16 +32,27 @@ public class Link<T extends BaseDto> {
 	}
 	
 	private String generateUrl(T entity, boolean view) {
-		return this.baseUrl() +
-				(!view ? ApplicationConstant.PATH_API_REST : "" ) +
-				entity.getBaseUrl();
+		String res;
+		if (view) {
+			
+			res = entity.getBaseUrl();
+
+			
+		} else {
+
+			res = this.baseUrl() +
+					ApplicationConstant.PATH_API_REST +
+					entity.getBaseUrl();
+			
+		}
+		return res;
 	}
 	
 	private String addUpdateLink(T entity, boolean view) {
 		return this.generateUrl(entity, view) +
 
 				entity.getRelativePath(HttpMethodEnum.PUT) +
-				(view? "/save": "");
+				(view? "/edit": "");
 	}
 		
 	private String addDeleteLink(T entity, boolean view) {

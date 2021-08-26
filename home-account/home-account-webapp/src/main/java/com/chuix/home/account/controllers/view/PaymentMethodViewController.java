@@ -1,28 +1,32 @@
 package com.chuix.home.account.controllers.view;
 
-import java.util.List;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_LIST_VIEW;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_PAYMENT_METHOD;
+import static com.chuix.home.account.constants.ApplicationConstant.PATH_UPDATE_VIEW;
+
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.chuix.home.account.controllers.tools.Link;
 import com.chuix.home.account.controllers.tools.Request;
 import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.services.PaymentMethodService;
+import com.chuix.home.account.dto.HttpMethodEnum;
 import com.chuix.home.account.dto.PaymentMethodDto;
 import com.chuix.home.account.dto.mapper.PaymentMethodDtoMapper;
-
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_CREATE;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_UPDATE;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_DELETE;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_READ;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_LIST;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_PAYMENT_METHOD;
-import static com.chuix.home.account.constants.ApplicationConstant.PATH_API_REST;
 
 
 @Controller
@@ -40,12 +44,15 @@ public class PaymentMethodViewController {
 	
 	private Function<PaymentMethod, PaymentMethodDto> mapperToDtoFunc;
 	
+	@Autowired
+	private Link link;
+	
 	PaymentMethodViewController() {
 		this.mapperToDtoFunc = (pm -> this.mapper.mapToDto(pm));
 	}
-
 	
-	@GetMapping(PATH_LIST)
+
+	@GetMapping(PATH_LIST_VIEW)
 	public String interpretText(Model model) {
 
 		model.addAttribute(
@@ -57,6 +64,45 @@ public class PaymentMethodViewController {
 		);
 		return "paymentmethod";
 
+	}
+	
+	@GetMapping(PATH_UPDATE_VIEW)
+	public String updatePaymentMethod(@PathVariable @NotNull Long id, Model model) throws BusinessException  {
+
+		PaymentMethodDto pmDto = this.request
+				.prepareView(
+						this.serive.getPaymentMethod(id), 
+						this.mapperToDtoFunc);
+		
+		model.addAttribute("pm", pmDto);
+		model.addAttribute("url", pmDto.getUrl(HttpMethodEnum.PUT.getValue(), true));
+		
+		return "paymentmethod_edit";
+	}
+	
+	@PostMapping(PATH_UPDATE_VIEW)
+	public String updatePaymentMethod(
+			@Valid @ModelAttribute("pm") PaymentMethodDto pmDto, 
+			BindingResult result, 
+			Model model 
+		) throws BusinessException {
+	
+		if( result.hasErrors()) {
+			model.addAttribute("pm", pmDto);
+			return "paymentmethod_edit";
+		} 
+		
+		PaymentMethodDto pmUpdatedDto = this.request
+				.prepareView(
+						this.serive.updatedPaymentMethod(
+								pmDto.getId(), 
+								this.mapper.mapToEntity(pmDto)
+						),
+						this.mapperToDtoFunc);
+		
+		model.addAttribute("pm", pmUpdatedDto);
+		
+		return "redirect:" + PATH_PAYMENT_METHOD + PATH_LIST_VIEW;
 	}
 
 }
