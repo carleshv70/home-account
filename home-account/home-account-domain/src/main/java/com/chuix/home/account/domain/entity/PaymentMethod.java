@@ -36,4 +36,17 @@ public class PaymentMethod {
 	
 	private Double previousBalance;
 	private LocalDate datePreviousBalance;
+	
+	public PaymentMethod copy() {
+		return PaymentMethod.builder()
+				.id(this.getId())
+				.accountNumber(this.getAccountNumber())
+				.balance(this.getBalance())
+				.datePreviousBalance(this.getDatePreviousBalance())
+				.deleteAt(this.getDeleteAt())
+				.name(this.getName())
+				.observations(this.getObservations())
+				.previousBalance(this.getPreviousBalance())
+				.build();
+	}
 }

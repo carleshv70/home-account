@@ -18,6 +18,7 @@ public class BusinessException extends Exception  {
 	public BusinessException(BusinessExceptionEnum err) {
 		super();
 		this.error = err;
+		this.message = err.getDescription();
 	}
 	
 	public BusinessException(BusinessExceptionEnum err, Exception exception) {
@@ -30,5 +31,9 @@ public class BusinessException extends Exception  {
 		this.message = message;
 	}
  
+	public BusinessException(BusinessExceptionEnum err, String message) {
+		this(err);
+		this.message = message;
+	}
 	
 }
