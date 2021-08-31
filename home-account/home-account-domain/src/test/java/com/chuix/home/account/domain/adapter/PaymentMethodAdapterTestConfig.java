@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
+import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.mapper.PaymentMethodMapperImpl;
 import com.chuix.home.account.persistence.entity.PaymentMethodEntity;
 
@@ -21,14 +22,14 @@ public class PaymentMethodAdapterTestConfig {
 
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public List<PaymentMethodEntity> paymentMethods(){
+	public List<PaymentMethodEntity> paymentMethodsEntity(){
 		
-		return Arrays.asList(this.paymentMethod1(), this.paymentMethod2());
+		return Arrays.asList(this.paymentMethodEntity1(), this.paymentMethodEntity2());
 	}
 
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public PaymentMethodEntity paymentMethod1() {
+	public PaymentMethodEntity paymentMethodEntity1() {
 		return PaymentMethodEntity.builder()
 				.accountNumber("111111111111111111111111111111")
 				.name("Carles Huix Vidal")
@@ -37,11 +38,37 @@ public class PaymentMethodAdapterTestConfig {
 
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public PaymentMethodEntity paymentMethod2() {
+	public PaymentMethodEntity paymentMethodEntity2() {
 		return PaymentMethodEntity.builder()
 				.accountNumber("22222222222222222222222222222")
 				.name("Carles Huix Vidal")
 				.balance(800d).build();
 	}
 	
+	
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public List<PaymentMethod> paymentMethods(){
+		
+		return Arrays.asList(this.paymentMethod1(), this.paymentMethod2());
+	}
+
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public PaymentMethod paymentMethod1() {
+		return PaymentMethod.builder()
+				.accountNumber("111111111111111111111111111111")
+				.name("Carles Huix Vidal")
+				.balance(900d).build();
+	}
+
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public PaymentMethod paymentMethod2() {
+		return PaymentMethod.builder()
+				.accountNumber("22222222222222222222222222222")
+				.name("Carles Huix Vidal")
+				.balance(800d).build();
+	}
+
 }

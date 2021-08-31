@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,10 +40,15 @@ class PaymentMethodAdapterTest {
 	private PaymentMethodDao pmDao;
 	
 	@Autowired
-	@Qualifier("paymentMethods") 
+	@Qualifier("paymentMethodsEntity") 
 	private List<PaymentMethodEntity> paymentMethodsEntity;
 
 	private List<PaymentMethodEntity> pmsEntity;
+	
+	@Autowired
+	@Qualifier("paymentMethods") 
+	private List<PaymentMethod> paymentMethods;
+
 	
 	private List<PaymentMethod> pms;
 	
@@ -55,15 +61,15 @@ class PaymentMethodAdapterTest {
 				.map(pm -> pm.copy())
 				.collect(Collectors.toList());
 		
-		this.pms = this.pmsEntity.stream()
-				.map(this.mapper::mapToEntity)
+		this.pms = this.paymentMethods.stream()
+				.map(pm -> pm.copy())
 				.collect(Collectors.toList());
 		
 		this.ordered = inOrder(this.pmDao);
 	}
 
 	@Test
-	void findAll_returnPMs() {
+	void testFindAll_returnPMs() {
 		
 		when(this.pmDao.findAll())
 			.thenReturn(this.pmsEntity);
@@ -72,9 +78,32 @@ class PaymentMethodAdapterTest {
 		
 		Assertions.assertThat(result.size()).isEqualTo(this.pms.size());
 		Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(pms);
-		
+
 		this.ordered.verify(this.pmDao, calls(1)).findAll();
 		this.ordered.verifyNoMoreInteractions();
 	}
+	
+	@Test
+	void testSave_withNewPM_shouldReturnPMAdded() {
+		
+		PaymentMethodEntity pme = PaymentMethodEntity.builder()
+				.accountNumber("44444444444444444444")
+				.name("Carles")
+				.balance(150d)
+				.build();
+		
+		when(this.pmDao.save(ArgumentMatchers.any(PaymentMethodEntity.class)))
+			.thenReturn(pme);
+		
+		PaymentMethod pmAdded = this.port.save( 
+				this.paymentMethods.get(0)
+		);
+		
+		Assertions.assertThat(pmAdded).usingRecursiveComparison().isEqualTo(this.mapper.mapToEntity(pme));
+		this.ordered.verify(this.pmDao, calls(1)).save(ArgumentMatchers.any(PaymentMethodEntity.class));
+		this.ordered.verifyNoMoreInteractions();
+	}
+	
+	
 
 }
