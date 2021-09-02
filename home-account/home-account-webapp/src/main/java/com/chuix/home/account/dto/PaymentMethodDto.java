@@ -13,9 +13,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.chuix.home.account.constants.ApplicationConstant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PaymentMethodDto implements BaseDto {
 	
 	private Long id;
@@ -38,10 +45,11 @@ public class PaymentMethodDto implements BaseDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate datePreviousBalance;
 	
-	private List<LinkDto> links;
+	@Getter(lazy = true)
+	private final  List<LinkDto> links = linksInit();
 	
-	public PaymentMethodDto() {
-		this.links = new ArrayList<>();
+	List<LinkDto> linksInit() {
+		return new ArrayList<LinkDto>();
 	}
 
 
@@ -78,4 +86,17 @@ public class PaymentMethodDto implements BaseDto {
 	}
 
 
+	public PaymentMethodDto copy() {
+		return PaymentMethodDto.builder()
+				.id(this.getId())
+				.accountNumber(this.getAccountNumber())
+				.balance(this.getBalance())
+				.datePreviousBalance(this.getDatePreviousBalance())
+				.name(this.getName())
+				.observations(this.getObservations())
+				.previousBalance(this.getPreviousBalance())
+				.build();
+	}
+
+	
 }
