@@ -22,10 +22,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.chuix.home.account.domain.adapter.PaymentMethodAdapter;
+import com.chuix.home.account.domain.api.PaymentMethodService;
 import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
+import com.chuix.home.account.domain.port.PaymentMethodPort;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -36,7 +37,7 @@ class PaymentMethodServiceTest {
 	private PaymentMethodService service;
 	
 	@MockBean
-	private PaymentMethodAdapter port;
+	private PaymentMethodPort port;
 	
 	@Autowired
 	@Qualifier("paymentMethods") 

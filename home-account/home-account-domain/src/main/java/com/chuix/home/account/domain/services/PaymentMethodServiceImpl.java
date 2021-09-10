@@ -6,16 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chuix.home.account.domain.adapter.PaymentMethodAdapter;
+import com.chuix.home.account.domain.api.PaymentMethodService;
 import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
+import com.chuix.home.account.domain.port.PaymentMethodPort;
 
 @Service
 public class PaymentMethodServiceImpl implements PaymentMethodService {
 
 	@Autowired
-	private PaymentMethodAdapter port;
+	private PaymentMethodPort port;
 
 	public List<PaymentMethod> getPaymentMethods() {
 
