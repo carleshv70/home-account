@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.port.PaymentMethodPort;
+import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
 import com.chuix.home.account.infrastructure.persistence.entity.PaymentMethodEntity;
 import com.chuix.home.account.infrastructure.persistence.mapper.PaymentMethodMapper;
 import com.chuix.home.account.infrastructure.persistence.repository.PaymentMethodRepository;
 
 @Component
-public class PaymentMethodAdapterImpl implements PaymentMethodPort {
+public class PaymentMethodAdapterImpl implements PaymentMethodPersistencePort {
 
 	@Autowired
 	private PaymentMethodMapper mapper;

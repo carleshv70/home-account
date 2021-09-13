@@ -1,8 +1,8 @@
-package com.chuix.home.account.domain.port;
+package com.chuix.home.account.domain.port.outcoming;
 
 import java.util.List;
 
-public interface Port<T> {
+public interface PersistencePort<T> {
 	
 	List<T> findAll();
 		

@@ -21,7 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.port.PaymentMethodPort;
+import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
 import com.chuix.home.account.infrastructure.persistence.entity.PaymentMethodEntity;
 import com.chuix.home.account.infrastructure.persistence.mapper.PaymentMethodMapper;
 import com.chuix.home.account.infrastructure.persistence.repository.PaymentMethodRepository;
@@ -32,7 +32,7 @@ import com.chuix.home.account.infrastructure.persistence.repository.PaymentMetho
 class PaymentMethodAdapterTest {
 
 	@Autowired
-	private PaymentMethodPort port;
+	private PaymentMethodPersistencePort port;
 	
 	@Autowired
 	private PaymentMethodMapper mapper;

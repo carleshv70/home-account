@@ -10,13 +10,13 @@ import com.chuix.home.account.domain.api.PaymentMethodService;
 import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
-import com.chuix.home.account.domain.port.PaymentMethodPort;
+import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
 
 @Service
 public class PaymentMethodServiceImpl implements PaymentMethodService {
 
 	@Autowired
-	private PaymentMethodPort port;
+	private PaymentMethodPersistencePort port;
 
 	public List<PaymentMethod> getPaymentMethods() {
 

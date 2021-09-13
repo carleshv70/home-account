@@ -26,7 +26,7 @@ import com.chuix.home.account.domain.api.PaymentMethodService;
 import com.chuix.home.account.domain.entity.PaymentMethod;
 import com.chuix.home.account.domain.exception.BusinessException;
 import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
-import com.chuix.home.account.domain.port.PaymentMethodPort;
+import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -37,7 +37,7 @@ class PaymentMethodServiceTest {
 	private PaymentMethodService service;
 	
 	@MockBean
-	private PaymentMethodPort port;
+	private PaymentMethodPersistencePort port;
 	
 	@Autowired
 	@Qualifier("paymentMethods") 
