@@ -20,8 +20,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.port.persistence.PaymentMethodPort;
 import com.chuix.home.account.infrastructure.persistence.entity.PaymentMethodEntity;
 import com.chuix.home.account.infrastructure.persistence.mapper.PaymentMethodMapper;
 import com.chuix.home.account.infrastructure.persistence.repository.PaymentMethodRepository;
@@ -32,7 +32,7 @@ import com.chuix.home.account.infrastructure.persistence.repository.PaymentMetho
 class PaymentMethodAdapterTest {
 
 	@Autowired
-	private PaymentMethodPersistencePort port;
+	private PaymentMethodPort port;
 	
 	@Autowired
 	private PaymentMethodMapper mapper;

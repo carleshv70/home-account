@@ -27,8 +27,8 @@ import com.chuix.home.account.application.dto.mapper.PaymentMethodDtoMapper;
 import com.chuix.home.account.application.tools.Link;
 import com.chuix.home.account.application.tools.Request;
 import com.chuix.home.account.domain.api.PaymentMethodService;
-import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.exception.BusinessException;
+import com.chuix.home.account.domain.core.exception.BusinessException;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 
 
 @Controller

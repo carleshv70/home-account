@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.chuix.home.account.application.dto.PaymentMethodDto;
 import com.chuix.home.account.application.dto.mapper.PaymentMethodDtoMapperImpl;
 import com.chuix.home.account.config.Enviroment;
-import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 
 
 @Configuration

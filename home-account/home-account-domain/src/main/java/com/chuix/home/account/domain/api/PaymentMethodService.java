@@ -2,8 +2,8 @@ package com.chuix.home.account.domain.api;
 
 import java.util.List;
 
-import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.exception.BusinessException;
+import com.chuix.home.account.domain.core.exception.BusinessException;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 
 public interface PaymentMethodService {
 

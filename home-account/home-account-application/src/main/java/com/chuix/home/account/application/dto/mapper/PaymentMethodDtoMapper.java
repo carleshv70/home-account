@@ -5,7 +5,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import com.chuix.home.account.application.dto.PaymentMethodDto;
-import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 
 @Mapper(
 		componentModel = "spring",

@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.services;
+package com.chuix.home.account.domain.core.services;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chuix.home.account.domain.api.PaymentMethodService;
-import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.exception.BusinessException;
-import com.chuix.home.account.domain.exception.BusinessExceptionEnum;
-import com.chuix.home.account.domain.port.outcoming.PaymentMethodPersistencePort;
+import com.chuix.home.account.domain.core.exception.BusinessException;
+import com.chuix.home.account.domain.core.exception.BusinessExceptionEnum;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.port.persistence.PaymentMethodPort;
 
 @Service
 public class PaymentMethodServiceImpl implements PaymentMethodService {
 
 	@Autowired
-	private PaymentMethodPersistencePort port;
+	private PaymentMethodPort port;
 
 	public List<PaymentMethod> getPaymentMethods() {
 

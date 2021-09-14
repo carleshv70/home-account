@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.exception;
+package com.chuix.home.account.domain.core.exception;
 
 /*
  * If begin with AE mean -> Application error

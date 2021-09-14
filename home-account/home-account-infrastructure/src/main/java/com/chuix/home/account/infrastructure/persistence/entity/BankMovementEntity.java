@@ -25,14 +25,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovementBankEntity {
+public class BankMovementEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@NotNull(message = "Este campo debe estar informado")
-//	private PaymentMethodEntity paymentMethod;
+	@NotNull(message = "Este campo debe estar informado")
+	private PaymentMethodEntity paymentMethod;
 
 	@NotNull(message = "Este campo debe estar informado")
 	private Character movimentType;  

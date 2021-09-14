@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 import com.chuix.home.account.infrastructure.persistence.entity.PaymentMethodEntity;
 
 @Mapper(componentModel = "spring")

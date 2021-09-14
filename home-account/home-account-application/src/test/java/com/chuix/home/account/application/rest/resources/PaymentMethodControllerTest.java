@@ -36,8 +36,8 @@ import com.chuix.home.account.application.dto.PaymentMethodDto;
 import com.chuix.home.account.application.dto.mapper.PaymentMethodDtoMapper;
 import com.chuix.home.account.application.rest.resources.PaymentMethodController;
 import com.chuix.home.account.domain.api.PaymentMethodService;
-import com.chuix.home.account.domain.entity.PaymentMethod;
-import com.chuix.home.account.domain.exception.BusinessException;
+import com.chuix.home.account.domain.core.exception.BusinessException;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(controllers = PaymentMethodController.class)

@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
-import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.services.PaymentMethodServiceImpl;
 
 @Configuration
 @Import(value = { PaymentMethod.class, PaymentMethodServiceImpl.class })

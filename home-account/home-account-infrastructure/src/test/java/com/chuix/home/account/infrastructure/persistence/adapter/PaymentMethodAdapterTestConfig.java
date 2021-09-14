@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
-import com.chuix.home.account.domain.entity.PaymentMethod;
+import com.chuix.home.account.domain.core.model.entity.PaymentMethod;
 import com.chuix.home.account.infrastructure.persistence.entity.PaymentMethodEntity;
 import com.chuix.home.account.infrastructure.persistence.mapper.PaymentMethodMapperImpl;
 
 @Configuration
 @Import({
-	PaymentMethodAdapterImpl.class,
+	PaymentMethodAdapter.class,
 	PaymentMethodMapperImpl.class
 })
 public class PaymentMethodAdapterTestConfig {

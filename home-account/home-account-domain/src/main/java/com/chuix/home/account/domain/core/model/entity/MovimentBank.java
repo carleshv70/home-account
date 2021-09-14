@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.entity;
+package com.chuix.home.account.domain.core.model.entity;
 
 import java.time.LocalDate;
 

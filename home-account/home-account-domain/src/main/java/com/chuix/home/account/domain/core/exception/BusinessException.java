@@ -1,4 +1,4 @@
-package com.chuix.home.account.domain.exception;
+package com.chuix.home.account.domain.core.exception;
 
 import lombok.Getter;
 import lombok.Setter;
